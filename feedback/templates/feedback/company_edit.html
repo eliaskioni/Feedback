@@ -1,5 +1,5 @@
 {% extends 'feedback/base.html' %}
-{% block title %}<title>{{ company.name }} | Feedback </title>{% endblock %}
+{% block title %}<title>{{ company.name }} || Feedback </title>{% endblock %}
 {% block breadcrumbs %}
 <a href="{% url 'feedback:index' %}">Home</a>&rsaquo; <a href="{% url 'feedback:company_detail' company.id %}">{{ company }}</a>
 &rsaquo; edit - {{ company }}
