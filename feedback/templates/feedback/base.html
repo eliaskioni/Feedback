@@ -20,7 +20,7 @@
       <div id="feedback-links">
         {% block links %}
         {% if user.is_authenticated %}
-        <a href="{% url 'feedback:logout' %}">Logout</a>
+        <a href="{% url 'feedback:logout' %}">Log out</a>
         {% endif %}
         {% endblock %}
       </div>
