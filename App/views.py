@@ -4,10 +4,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from feedback.forms import CompanyForm, EmployeeCreateForm, FeedbackForm, EmployeeEditForm
-from feedback.models import Company, Feedback
-from django.contrib.auth.decorators import login_required
-# Create your views here.
+from App.forms import CompanyForm, EmployeeCreateForm, FeedbackForm, EmployeeEditForm
+from App.models import Company, Feedback
+
+
 def index(request):
     if request.user.is_authenticated():
         companies = Company.objects.all()
@@ -18,10 +18,10 @@ def index(request):
         return HttpResponseRedirect(reverse('feedback:login'))
 
 def login(request):
-    #checks if the user is already logged in
+    # checks if the user is already logged in
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('feedback:index'))
-    #if the user is not logged in displays the log in form
+    # if the user is not logged in displays the log in form
     else:
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
@@ -38,7 +38,7 @@ def login(request):
         return render(request, 'feedback/login.html', {'form': form })
 
 def logout(request):
-    #logs out a given user request and redisplay the logging form
+    # logs out a given user request and redisplay the logging form
     feedback_logout(request)
     return HttpResponseRedirect(reverse('feedback:login'))
 
@@ -183,7 +183,7 @@ def customer_feedback(request, company_id):
     if request.method == "POST":
         form = FeedbackForm(request.POST)
     else:
-        return HttpResponseRedirect(revrse('feedback:homepage'))
+        return HttpResponseRedirect(reverse('feedback:homepage'))
 
 def homepage(request):
     return HttpResponseRedirect(reverse('feedback:companies_list'))

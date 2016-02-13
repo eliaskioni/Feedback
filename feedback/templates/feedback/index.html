@@ -1,0 +1,48 @@
+{% extends 'feedback/base.html' %}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>Index | Feedback</title>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width initial-scale=1.0"></meta>
+</head>
+<body>
+
+  {%}
+  {% block content-main %}
+  <div id="column-left">
+    <div class="column-title">
+      <h1>Companies</h1>
+    </div>
+    <div class="add-link">
+      <p><a href="{% url 'feedback:new_company' %}">Add Company</a></p>
+    </div>
+    <div class="column-list">
+      <ul>
+        {% for company in companies %}
+        <li>
+          <a href="{% url 'feedback:company_detail' company.id %}">{{ company }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+  </div>
+</div>
+
+<div id="column-right">
+  <div class="column-title">
+    <h1>Employees</h1>
+  </div>
+  <div class="add-link">
+    <p><a href="{% url 'feedback:new_employee' %}">Add Employee</a></p>
+  </div>
+  <div class="column-list">
+    <ul>
+      {% for employee in employees %}
+      <li><a href="{% url 'feedback:employee_detail' employee.id %}">{{ employee }}</a></li>
+      {% endfor %}
+    </ul>
+</div>
+
+  {% endblock %}
+</body>
+</html>

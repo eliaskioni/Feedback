@@ -1,0 +1,28 @@
+{% extends 'feedback/base.html' %}
+{% block breadcrumbs %}
+<a href="{% url 'feedback:index' %}">Home</a> &rsaquo; {{employee.first_name }}
+{% endblock %}
+{% block content-main %}
+<div class="add-link-right">
+  <a href="{% url 'feedback:employee_edit' employee.id %}">Edit</a>
+</div>
+<div id="column-left">
+  <div class="employee-detail">
+    First Name : <strong class="emphasis">{{ employee.first_name }}</strong>
+  </div>
+  <div class="employee-detail">
+    Last Name : <strong class="emphasis"> {{ employee.last_name }}</strong>
+  </div>
+  <div class="space">
+
+  </div>
+
+  <h3>Companies assigned</h3>
+  <ul>
+    {% for company in employee.company_set.all %}
+    <li>{{ company }}</li>
+    {% endfor %}
+  </ul>
+
+</div>
+{% endblock %}

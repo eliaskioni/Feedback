@@ -1,5 +1,5 @@
 from django import forms
-from feedback.models import Company, Feedback
+from App.models import Company, Feedback
 from django.contrib.auth.models import User
 
 

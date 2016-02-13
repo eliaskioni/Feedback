@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('tagline', models.CharField(max_length=100)),
                 ('logo', models.ImageField(upload_to=b'Images')),
-                ('date_created', models.DateTimeField(auto_now=True)),
+                ('description', models.TextField()),
                 ('employees', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -31,11 +31,7 @@ class Migration(migrations.Migration):
                 ('last_name', models.CharField(max_length=100)),
                 ('phone_number', models.PositiveIntegerField()),
                 ('comment', models.CharField(max_length=300)),
+                ('company', models.ForeignKey(to='App.Company')),
             ],
-        ),
-        migrations.AddField(
-            model_name='company',
-            name='feedbacks',
-            field=models.ForeignKey(to='feedback.Feedback'),
         ),
     ]
