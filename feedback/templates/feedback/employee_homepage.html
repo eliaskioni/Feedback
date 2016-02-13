@@ -1,0 +1,11 @@
+{% extends 'feedback/base.html' %}
+{% block title %}<title>{{ user }} | Feedback </title>{% endblock %}
+{% block content-main %}
+<ul>
+  {% for company in user.company_set.all() %}
+  <li>
+      <a href="{% url 'Feedback:company_detail' company.id %}">{{ company.name }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

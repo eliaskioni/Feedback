@@ -1,0 +1,43 @@
+{% extends 'feedback/base.html' %}
+{% block title %}<title>Companies | Feedback</title>{% endblock %}
+{% block breadcrumbs %}
+{% if user.is_superuser %}
+<a href="{% url 'feedback:index' %}">Home</a>&rsaquo;
+<a href="{% url 'feedback:company_detail' company.id %}">{{ company }}</a> &rsaquo;
+{% endif %}
+{% if user.is_authenticated and not user.is_superuser %}
+<a href="{% url 'feedback:companies_list' %}">Home</a> &rsaquo;
+{{ company }} - feedback
+{% endif %}
+{% if user.is_anonymous %}
+<a href="{% url 'feedback:homepage' %}">Companies</a> &rsaquo;
+{{ company }}
+{% endif %}
+{% endblock %}
+{% block content-main %}
+{% if company %}
+<h1>{{ company }}</h1>
+{% if user.is_superuser %}
+{% for feedback in company.feedback_set.all %}
+<div class="feedbacks">
+  <p>{{ feedback.first_name }}</p>
+  <p>
+    {{ feedback.last_name }}
+  </p>
+  <p>
+    {{ feedback.phone_number }}
+  </p>
+  <p>
+    {{ feedback.comment }}
+  </p>
+</div>
+<hr>
+{% endfor %}
+{% endif %}
+{% if not user.is_superuser %}
+{% include 'feedback/company_detail.html' %}
+{% endif %}
+{% else %}
+<p><strong>NO company</strong></p>
+{% endif %}
+{% endblock %}

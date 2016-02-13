@@ -1,0 +1,37 @@
+{% extends 'feedback/base.html' %}
+{% block title %}<title>Companies | Feedback</title>{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block content-main %}
+{{ user }}
+{% if user.is_superuser %}
+<ul>
+  {% for company in companies %}
+  <li><a href="{% url 'feedback:company_edit' company.id %}">{{ company }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if user.is_authenticated and not user.is_superuser %}
+<ul>
+  {% for company in user.company_set.all %}
+  <li><a href="{% url 'feedback:company_feedbacks' company.id %}">{{ company }}</a></li>
+  {% endfor %}
+  <br>
+<p> select a company to recieve feedback from </p>
+  {% for company in companies %}
+  {% if company not in user.company_set.all %}
+  <li><a href="{% url 'feedback:add_company' company.id user.id %}">{{ company }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if user.is_anonymous %}
+<ul>
+  {% for company in companies %}
+  <li><a href="{% url 'feedback:company_feedbacks' company.id %}">{{ company }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

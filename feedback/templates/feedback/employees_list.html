@@ -1,0 +1,10 @@
+{% extends 'feedback/base.html' %}
+{% block header %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block content-main %}
+<ul>
+  {% for employee in employees %}
+  <li><a href="{% url 'feedback:employee_detail' employee.id %}">{{ employee }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

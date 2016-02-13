@@ -1,0 +1,19 @@
+{% extends 'feedback/base.html' %}
+{% block title %}<title>{{ company.name }} | Feedback </title>{% endblock %}
+{% block breadcrumbs %}
+<a href="{% url 'feedback:index' %}">Home</a>&rsaquo; <a href="{% url 'feedback:company_detail' company.id %}">{{ company }}</a>
+&rsaquo; edit - {{ company }}
+{% endblock %}
+{% block content-main %}
+<div class="form-centre">
+<div class="delete-link">
+  <a href="{% url 'feedback:company_delete' company.id %}">Delete</a>
+</div>
+<form enctype="multipart/form-data" action="." method="post"> {% csrf_token %}
+  {{ form.as_p }}
+<input type="submit" value="Save">
+</div>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width initial-scale=1.0"></meta>
+
+  {% block title %}{% endblock %}
+
+  <link href="{% static 'feedback/base.css' %}" rel="stylesheet" type="text/css"></link>
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="header">
+      <div id="site-name">
+        {% block site-name %} Feedback {% endblock %}
+      </div>
+      <div id="feedback-links">
+        {% block links %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'feedback:logout' %}">Logout</a>
+        {% endif %}
+        {% endblock %}
+      </div>
+    </div>
+    <div id="breadcrumbs">
+        {% block breadcrumbs %}{% endblock %}
+    </div>
+    <div id="content">
+      <div id="content-main">
+        {% block content-main %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</body>

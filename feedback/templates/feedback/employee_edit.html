@@ -1,0 +1,37 @@
+{% extends 'feedback/base.html' %}
+{% block title %}<title>{{ company.name }} | Feedback </title>{% endblock %}
+{% block breadcrumbs %}
+<a href="{% url 'feedback:index' %}">Home</a> &rsaquo;
+<a href="{% url 'feedback:employee_detail' employee.id %}">{{ employee }}</a> &rsaquo;
+Edit-{{employee }}
+{% endblock %}
+{% block content-main %}
+<div class="delete-link">
+  <a href="{% url 'feedback:employee_delete' employee.id %}">Delete</a>
+</div>
+<div id="column-left">
+  <form action="." method="post" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+  </form>
+</div>
+<div id="column-right">
+  <h2>Click on a company to add it to the Employee's list of companies</h2>
+  <ul>
+    {%for company in companies %}
+    {% if company not in employee.company_set.all %}
+    <li><a href="{% url 'feedback:add_company' company.id employee.id %}">{{ company }}</a></li>
+    {% endif %}
+    {% endfor %}
+    <hr>
+    <hr>
+    <h2>Click on a company to remove it to from emloyee's list companies</h2>
+    <ul>
+      {% for company in employee.company_set.all %}
+      <li><a href="{% url 'feedback:remove_company' company.id employee.id %}">{{ company }}</a></li>
+      {% endfor %}
+    </ul>
+  </ul>
+</div>
+{% endblock %}

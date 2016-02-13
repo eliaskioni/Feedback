@@ -1,0 +1,44 @@
+{% extends 'feedback/base_detail.html' %}
+{% block title %} <title>{{ company }} | Feedback </title>{% endblock %}
+{% block heading %}
+{% endblock %}
+{% block breadcrumbs %}
+{% if user.is_authenticated and user.is_superuser %}
+<a href="{% url 'feedback:index' %}">Home</a> &rsaquo; {{ company }}
+{% endif %}
+{% endblock %}
+{% block content-main %}
+{% if user.is_authenticated and user.is_superuser %}
+<div class="company-feedback">
+  <a href="{% url 'feedback:company_feedbacks' company.id %}">Feedbacks</a>
+</div>
+<div class="company-edit">
+  <a href="{% url 'feedback:company_edit' company.id %}">Change</a>
+</div>
+{% endif %}
+<div class="company-content">
+    <strong><h2>Name:</h2>{{ company.name }}</strong>
+</div>
+
+<div class="company-content">
+  <strong><h2>Tagline</h2>{{ company.tagline }}</strong>
+</div>
+{% if not user.is_authenticated %}
+<div class="company-content">
+  <p>
+    <p>
+      Decription
+    </p>{{ company.description }}
+  </p>
+</div>
+{% endif %}
+<div class="company-content">
+  <h2>Logo</h2><img src="{{ company.logo.url }}" alt="{{ company.name }}"/>
+</div>
+{% if not user.is_superuser %}
+<form action="." method="post"> {% csrf_token %}
+  {{form.as_p }}
+  <input type="submit" value="send">
+</form>
+{% endif %}
+{% endblock %}

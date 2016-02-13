@@ -1,0 +1,9 @@
+{% extends 'feedback/base.html' %}
+{% block title %} <title>New Company | Feedback </title>{% endblock %}
+{% block breadcrumbs %}<a href="{% url 'feedback:index' %}">Home</a> &rsaquo; New {% endblock %}
+{% block content-main %}
+<form enctype="multipart/form-data" action="." method='post'>   {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="New company"></input>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width initial-scale=1.0"></meta>
+
+  {% block title %}{% endblock %}
+
+  <link href="{% static 'feedback/base.css' %}" rel="stylesheet" type="text/css"></link>
+
+</head>
+
+<body>
+  <div id="container">
+    {% block header %}{% endblock %}
+    <div id="content">
+      <div id="content-main">
+        {% block content-main %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</body<
